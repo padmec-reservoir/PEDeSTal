@@ -2,7 +2,7 @@ import h5py
 import meshio
 
 
-class MeshHandler:
+class MeshManeger:
 
     def __init__(self, mesh_file = None):
         self.points, self.cells, self.point_data, self.cell_data, self.field_data =
