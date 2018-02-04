@@ -1,6 +1,7 @@
 import unittest
-from ..import meshmanager
+from ..meshmanager import MeshManager
 
 class MeshManagerTest(unittest.TestCase):
 
-    pass
+    def test_file_loading(self):
+        pass
