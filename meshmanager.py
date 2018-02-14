@@ -7,8 +7,7 @@ class MeshManager:
         self.storage_file = h5py.File('storage.hdf5', 'w', driver='core')
 
     def load_file(self, mesh_filename):
-        self.points, self.cells, self.point_data, self.cell_data, self.field_data =\
-        meshio.read(mesh_filename)
+        self.points, self.cells, self.point_data, self.cell_data, self.field_data = meshio.read(mesh_filename)
 
         # self.mesh_data = h5py.File("new_mesh.hdf5", 'w')
         #
