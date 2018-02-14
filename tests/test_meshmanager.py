@@ -1,19 +1,20 @@
 import unittest
 import h5py
-from ..meshmanager import MeshManager
+import meshio
+
+from PEDeSTal.meshmanager import MeshManager
+from unittest import mock
+
 
 class MeshManagerTest(unittest.TestCase):
 
-    def setUp(self):
-        self.mesh = MeshManager()
-        self.file_instance = h5py.File('storage_test.hdf5', 'w', driver='core', backing_store=False)
-
-    def tearDown(self):
-        self.file_instance.close()
-
     def test_hdf5_file_loading(self):
-        """
-        Test if HDF5 file has been loaded upon instanciation
-        Asserts with the name of the root dir of hdf5 file
-        """
-        self.assertEqual(self.mesh.storage_file.name, self.file_instance.name)
+        with mock.patch('PEDeSTal.meshmanager.h5py.File') as mock_hdf5:
+            mesh = MeshManager()
+            mock_hdf5.assert_called_with('storage.hdf5', 'w', driver='core')
+
+    def test_load_mesh_file(self):
+        with mock.patch('PEDeSTal.meshmanager.meshio.read') as mock_open_mesh:
+            mesh = MeshManager()
+            mesh.load_file('geometry_test.msh')
+            mock_open_mesh.assert_called_with('geometry_test.msh')

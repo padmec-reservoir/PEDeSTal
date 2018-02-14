@@ -4,9 +4,12 @@ import meshio
 class MeshManager:
 
     def __init__(self):
-        self.storage_file = h5py.File('storage.hdf5', 'w', driver='core', backing_store=False)
-        # self.points, self.cells, self.point_data, self.cell_data, self.field_data =
-        #     meshio.read(mesh_file)
+        self.storage_file = h5py.File('storage.hdf5', 'w', driver='core')
+
+    def load_file(self, mesh_filename):
+        self.points, self.cells, self.point_data, self.cell_data, self.field_data =\
+        meshio.read(mesh_filename)
+
         # self.mesh_data = h5py.File("new_mesh.hdf5", 'w')
         #
         # self.all_entities = self.mesh_data.create_group('all_entities')
